@@ -3,17 +3,18 @@ program tictactoe;
 uses crt;
 
 var tablero:array[1..9] of char;
-    i,iFicha: integer;
+    i: integer;
     celda: integer;
     ficha: char;
     juegaX: boolean;
     ref: integer;
     varGanador, nombreJugador: string;
-    juegoTerminado, volverMenu: boolean;
+    juegoTerminado: boolean;
     contJugadas: integer;
     jugador:array[1..2] of string;
-    repetirJuego: string;
-
+    volverMenu: char;
+    menuSel: integer;
+    salir: boolean;
 procedure dibujaFicha(iFicha: integer);
 begin
      case tablero[iFicha] of
@@ -25,7 +26,7 @@ begin
      NormVideo
 end;
 
-procedure cabecera();
+procedure holaTateti();
 begin
      writeln(' _________  ________  _________  _______  _________  ___     ');
      writeln('|\___   ___|\   __  \|\___   ___|\  ___ \|\___   ___|\  \    ');
@@ -38,7 +39,7 @@ end;
 procedure matriz();
 begin
      clrscr;
-     cabecera();
+     holaTateti();
      writeln('');
      write(#218);
      for i:= 1 to 3 do
@@ -215,24 +216,98 @@ begin
      end;
 end;
 
-procedure iniciar();
+procedure iniciarTateti();
+var auxJugador:string;
+x:integer;
 begin
+     clrscr;
      juegaX := true;
      initMatriz();
-     for i:= 1 to 2 do
-     begin
-          write('Ingrese nombre de jugador ', i,': ');
-          readln(jugador[i]);
+     for x:= 1 to 2 do begin
+          write('Ingrese nombre de jugador ', x,': ');
+          readln(jugador[x]);
      end;
      matriz();
      contJugadas := 0;
 end;
 
+procedure tateti();
 begin
-iniciar();
+iniciarTateti();
 repeat
       dibujaTablero();
+      if juegoTerminado = true then
+      begin
+           delay(4000);
+           repeat
+                 clrscr;
+                 write('Desea volver a jugar?[S/N]');
+                 readln(volverMenu);
+           until (volverMenu = 'S') or (volverMenu = 'N');
+           if volverMenu = 'S' then
+           begin
+                writeln('comienzo juego');
+                clrscr;
+                iniciarTateti();
+                juegoTerminado := false;
+           end
+           else
+           begin
+                juegoTerminado := true;
+           end;
+      end;
 until juegoTerminado = true;
-readkey;
+end;
+
+procedure bienvenido();
+begin
+     writeln(' _________  ________    _______     ');
+     writeln('|\___   ___|\   __  \  /  ___  \    ');
+     writeln('\|___ \  \_\ \  \|\  \/__/|_/  /|   ');
+     writeln('     \ \  \ \ \   ____|__|//  / /   ');
+     writeln('      \ \  \ \ \  \___|   /  /_/__  ');
+     writeln('       \ \__\ \ \__\     |\________\');
+     writeln('        \|__|  \|__|      \|_______|');
+end;
+
+function menu():integer;
+var opMenu:integer;
+begin
+     repeat
+           clrscr;
+           bienvenido();
+           writeln('');writeln('');
+           writeln('1) TaTeTi');
+           writeln('2) Calendario');
+           writeln('3) Qr');
+           writeln('4) Salir');
+           write('Ingrese opcion: ');
+           read(opMenu);
+     until (opMenu >= 1) and (opMenu <= 4);
+     menu := opMenu;
+end;
+
+
+
+
+//main
+begin
+repeat
+      menuSel := menu();
+      case menuSel of
+           1: tateti();
+           2:begin
+                  clrscr;
+                  writeln('calendario no disponible');
+                  delay(2000);
+           end;
+           3:begin
+                  clrscr;
+                  writeln('qr no disponible');
+                  delay(2000);
+           end;
+           4: salir:=true;
+      end;
+until salir = true;
 
 end.
