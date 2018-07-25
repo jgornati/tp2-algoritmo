@@ -13,7 +13,7 @@ var tablero:array[1..9] of char;
     contJugadas: integer;
     jugador:array[1..2] of string;
     volverMenu: char;
-    menuSel: integer;
+    menuSel: char;
     salir: boolean;
 procedure dibujaFicha(iFicha: integer);
 begin
@@ -219,16 +219,31 @@ end;
 procedure iniciarTateti();
 var auxJugador:string;
 x:integer;
+modoJuego:integer;
 begin
+     x:=1;
      clrscr;
      juegaX := true;
      initMatriz();
-     for x:= 1 to 2 do begin
-          write('Ingrese nombre de jugador ', x,': ');
-          readln(jugador[x]);
-     end;
-     matriz();
-     contJugadas := 0;
+	 repeat
+	 clrscr;
+	 writeln('Ingrese modo de juego');
+	 writeln('1) Jugador 1 vs Jugador 2');
+	 writeln('2) Jugador 1 vs PC');
+	 readln(modoJuego);
+     {* No se si el problema es porque es un array de string pero en la primer
+      vuelta no se detiene a esperar el ingreso por teclado, en la segunda
+      vuelta si, probe cambiando el tipo por integer y funciona, como así
+      tambien funciona la segunda vez que es llamado este procedure al repetir
+      el juego *}
+      {* Cambie el menu a char y puse readkey parece que apretar enter tiene
+      como un rebote *}
+      for x:= 1 to 2 do begin
+            Write('Ingrese nombre de jugador ', x,': ');
+            ReadLn(jugador[x]);
+      end;
+      matriz();
+      contJugadas := 0;
 end;
 
 procedure tateti();
@@ -270,8 +285,8 @@ begin
      writeln('        \|__|  \|__|      \|_______|');
 end;
 
-function menu():integer;
-var opMenu:integer;
+function menu():char;
+var opMenu: char;
 begin
      repeat
            clrscr;
@@ -282,8 +297,8 @@ begin
            writeln('3) Qr');
            writeln('4) Salir');
            write('Ingrese opcion: ');
-           read(opMenu);
-     until (opMenu >= 1) and (opMenu <= 4);
+           opMenu := readKey;
+     until (opMenu >= '1') and (opMenu <= '4');
      menu := opMenu;
 end;
 
@@ -295,18 +310,18 @@ begin
 repeat
       menuSel := menu();
       case menuSel of
-           1: tateti();
-           2:begin
+           '1': tateti();
+           '2':begin
                   clrscr;
                   writeln('calendario no disponible');
                   delay(2000);
            end;
-           3:begin
+           '3':begin
                   clrscr;
                   writeln('qr no disponible');
                   delay(2000);
            end;
-           4: salir:=true;
+           '4': salir:=true;
       end;
 until salir = true;
 
