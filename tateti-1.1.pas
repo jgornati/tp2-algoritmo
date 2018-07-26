@@ -1,4 +1,4 @@
-program tp2;
+program tictactoe;
 
 uses crt;
 
