@@ -1,4 +1,4 @@
-program tictactoe;
+program tp2;
 
 uses crt;
 
@@ -487,6 +487,44 @@ end;
 //FIN BLOQUE CODIGO BARRA
 //**************************************************
 
+//**************************************************
+//BLOQUE CALENDARIO GRREGRIANO
+//**************************************************
+procedure calendarioGregoriano();
+var diaTxt: array[0..6] of string = ('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
+t: array[0..11] of integer = (0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4);
+dia, mes, anio: integer;
+k, h, hAuxInt: integer;
+j, hAux: real;
+begin
+	repeat
+		clrscr;
+		write('Ingrese el dia: ');
+		readln(dia);
+		write('Ingrese el mes: ');
+		readln(mes);
+		write('Ingrese el anio: ');
+		readln(anio);
+
+		if mes < 3 then
+			anio := anio - 1;
+
+		hAux := anio + round(anio/4) - round(anio/100) + round(anio/400) + t[mes - 1] + dia;
+		hAuxInt := round(hAux);
+		h := hAuxInt mod 7;
+		writeln('El dia es: ',diaTxt[h]);
+
+		writeln('<Presione cualquier tecla para continuar>');
+		write('<ESC para salir>');
+		continuar := readkey;
+	until continuar = #27;
+end;
+
+
+//**************************************************
+//FIN BLOQUE CALENDARIO GRREGRIANO
+//**************************************************
+
 procedure bienvenido();
 begin
 	writeln(' _________  ________    _______     ');
@@ -524,11 +562,7 @@ repeat
 	menuSel := menu();
 	case menuSel of
 		'1': tateti();
-		'2':begin
-				clrscr;
-				writeln('calendario no disponible');
-				delay(2000);
-			end;
+		'2': calendarioGregoriano();
 		'3': codigoBarra();
 		'4': salir:=true;
 	end;
