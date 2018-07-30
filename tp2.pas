@@ -492,12 +492,32 @@ end;
 //BLOQUE CALENDARIO GRREGRIANO
 //**************************************************
 procedure calendarioGregoriano();
-var diaTxt: array[0..6] of string = ('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
-t: array[0..11] of integer = (0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4);
+var diaTxt: array[0..6] of string;
+t: array[0..11] of integer;
 dia, mes, anio: integer;
-k, h, hAuxInt: integer;
-j, hAux: real;
+h, hAuxInt: integer;
+hAux: real;
 begin
+	diaTxt[0] := 'Domingo';
+	diaTxt[1] := 'Lunes';
+	diaTxt[2] := 'Martes';
+	diaTxt[3] := 'Miercoles';
+	diaTxt[4] := 'Jueves';
+	diaTxt[5] := 'Viernes';
+	diaTxt[6] := 'Sabado';
+
+	t[0] := 0;
+	t[1] := 3;
+	t[2] := 2;
+	t[3] := 5;
+	t[4] := 0;
+	t[5] := 3;
+	t[6] := 5;
+	t[7] := 1;
+	t[8] := 4;
+	t[9] := 6;
+	t[10] := 2;
+	t[11] := 4;
 	repeat
 		clrscr;
 		write('Ingrese el dia: ');
