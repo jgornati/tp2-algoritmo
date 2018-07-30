@@ -1,3 +1,4 @@
+{* 113 - Gornati Joel, Vega Luis *}
 program tp2;
 
 uses crt;
