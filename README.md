@@ -1,6 +1,6 @@
 # Trabajo práctico Nº2 
 
-<img src="https://github.com/jgornati/tp2-algoritmo/blob/master/images/img1.png" align="center" height="480" width="640">
+<img src="https://github.com/jgornati/tp2-algoritmo/blob/master/images/img1.png" height="480" width="640">
 
 - Universidad: UTN FRRo
 - Carrera: Ing. en sistemas de la información.
