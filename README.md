@@ -1,5 +1,7 @@
 # Trabajo práctico Nº2 
 
+![Image of tp2](https://github.com/jgornati/tp2-algoritmo/blob/master/images/img1.png)
+
 - Universidad: UTN FRRo
 - Carrera: Ing. en sistemas de la información.
 - Materia: Algoritmo y estructura de datos.
